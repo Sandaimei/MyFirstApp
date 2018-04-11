@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "789146580940",
+    "firebase_url": "https://myfirstapp-dfea1.firebaseio.com",
+    "project_id": "myfirstapp-dfea1",
+    "storage_bucket": "myfirstapp-dfea1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789146580940:android:ba70e47d01a28ad2",
+        "android_client_info": {
+          "package_name": "com.example.willie.myfirstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789146580940-se087daje8vg63ktg9ns9104c6kjnf00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9A9YI4nKgUF3jZZf9OW-ioCHtzyHBhd4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
