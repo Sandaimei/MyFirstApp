@@ -107,7 +107,7 @@ public class Registration extends AppCompatActivity {
     private void sendUserData() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         @SuppressLint("RestrictedApi") DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
-        UserProfile profile = new UserProfile(firstName, lastName, email, age);
+        UserProfile profile = new UserProfile(firstName, lastName, age);
         myRef.setValue(profile);
     }
 }
