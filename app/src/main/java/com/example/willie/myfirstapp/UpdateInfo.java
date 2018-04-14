@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class UpdateInfo extends AppCompatActivity {\
+public class UpdateInfo extends AppCompatActivity {
 
     private TextView instructions;
     private EditText updatedFirstName;
@@ -37,6 +37,6 @@ public class UpdateInfo extends AppCompatActivity {\
 
 
     public Boolean validate() {
-
+        return true;
     }
 }

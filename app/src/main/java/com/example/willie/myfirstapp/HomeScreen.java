@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +24,15 @@ public class HomeScreen extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private TextView profileName;
 
+    Button button_Play;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
 
         profileName = findViewById(R.id.tvProfileName);
+        button_Play = (Button) findViewById(R.id.button_Play);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -43,6 +48,13 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(HomeScreen.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        button_Play.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                finish();
+                startActivity(new Intent(HomeScreen.this, GameState.class));
             }
         });
     }
@@ -68,4 +80,6 @@ public class HomeScreen extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
