@@ -42,7 +42,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                profileName.setText("HI " + userProfile.getUserFirst_Name() + "!");
+                profileName.setText("HI " + userProfile.getFirst_Name() + "!");
             }
 
             @Override
