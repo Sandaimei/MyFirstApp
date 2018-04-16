@@ -5,13 +5,23 @@ public class UserProfile {
     public String First_Name;
     public String Last_Name;
     public String Age;
+    public int highscore;
 
     public UserProfile() {};
 
-    public UserProfile(String First_Name, String Last_Name, String Age) {
+    public UserProfile(String First_Name, String Last_Name, String Age, int highscore) {
         this.First_Name = First_Name;
         this.Last_Name = Last_Name;
         this.Age = Age;
+        this.highscore = highscore;
+    }
+
+    public int getHighscore() {
+        return highscore;
+    }
+
+    public void setHighscore(int highscore) {
+        this.highscore = highscore;
     }
 
     public String getUserFirst_Name() {

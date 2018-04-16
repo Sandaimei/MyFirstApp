@@ -1,22 +1,43 @@
 package com.example.willie.myfirstapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class GameState extends AppCompatActivity {
 
-    TextView textView_Time, textView_Clicks, textView_HighScore;
-    Button button_Clicks, button_Back, button_Start;
+    //Views + Buttons
+    TextView textView_Time, textView_Clicks, textView_HighScore, textView_Start;
+    ImageView imageView_Back;
+    ImageButton imageButton_Clicks, imageButton_Back, imageButton_Start;
 
+    //TIMER
     CountDownTimer cd_timer;
     int timer = 30;
-    int clicks = 0;
 
+    //CLICKS
+    int clicks = 0;
+    int highScore;
+
+    //DATABASE
+    FirebaseDatabase firebaseDatabase;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -27,16 +48,37 @@ public class GameState extends AppCompatActivity {
         textView_Time = (TextView) findViewById(R.id.textView_Time);
         textView_Clicks = (TextView) findViewById(R.id.textView_Clicks);
         textView_HighScore = (TextView) findViewById(R.id.textView_HighScore);
-        button_Clicks = (Button) findViewById(R.id.button_Clicks);
-        button_Back = (Button) findViewById(R.id.button_Back);
-        button_Start = (Button) findViewById(R.id.button_Start);
+        textView_Start = (TextView) findViewById(R.id.textView_Start);
+        imageView_Back = (ImageView) findViewById(R.id.imageView_back);
+        imageButton_Clicks = (ImageButton) findViewById(R.id.imageButton_Clicks);
+        imageButton_Back = (ImageButton) findViewById(R.id.imageButton_Back);
+        imageButton_Start = (ImageButton) findViewById(R.id.imageButton_Start);
 
         //Enable Start; Disable Clicks
-        button_Start.setEnabled(true);
-        button_Clicks.setEnabled(false);
+        imageButton_Start.setEnabled(true);
+        imageButton_Clicks.setEnabled(false);
 
         //Set text of start button
-        button_Start.setText("START");
+        textView_Start.setText("START");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        @SuppressLint("RestrictedApi") final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        final DatabaseReference highscoreReference = databaseReference.child("highscore");
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //Countdown timer
         cd_timer = new CountDownTimer(30000, 1000){
@@ -46,33 +88,40 @@ public class GameState extends AppCompatActivity {
             }
 
             public void onFinish(){
-                button_Clicks.setEnabled(false);
+                imageButton_Clicks.setEnabled(false);
+                //if clicks is > firebase highscore stored
+                //update the highscore
+                if(clicks > highScore){
+                    highscoreReference.setValue(clicks);
+
+                }
+
             }
         };
 
         //On click, start button
-        button_Start.setOnClickListener(new View.OnClickListener(){
+        imageButton_Start.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 //Start the timer
-                if(((String) button_Start.getText()) == "START") {
+                if(((String) textView_Start.getText()) == "START") {
                     cd_timer.start();
-                    button_Start.setText("RESET");
-                    button_Clicks.setEnabled(true);
+                    textView_Start.setText("RESET");
+                    imageButton_Clicks.setEnabled(true);
                 }
                 //Reset Timer
                 else{
                     cd_timer.cancel();
                     timer = 30;
                     clicks = 0;
-                    button_Clicks.setEnabled(false);
+                    textView_Clicks.setText("Clicks: " + clicks);
+                    imageButton_Clicks.setEnabled(false);
                     textView_Time.setText("Time: " + timer);
-                    button_Start.setText("START");
+                    textView_Start.setText("START");
                 }
             }
         });
-
-        button_Back.setOnClickListener(new View.OnClickListener(){
+        imageButton_Back.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 finish();
                 startActivity(new Intent(GameState.this, HomeScreen.class));
@@ -80,11 +129,34 @@ public class GameState extends AppCompatActivity {
         });
 
         //On click, click button
-        button_Clicks.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                clicks++;
-                textView_Clicks.setText("Clicks: " + clicks);
+        imageButton_Clicks.setOnTouchListener(new View.OnTouchListener(){
+            @SuppressLint("ClickableViewAccessibility")
+            public boolean onTouch(View v, MotionEvent event) {
+                //On Press make image larger
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    float x = (float) 1.15;
+                    float y = (float) 1.15;
+
+                    imageButton_Clicks.setScaleX(x);
+                    imageButton_Clicks.setScaleY(y);
+                    //When button is pressed, it is considered a click
+                    clicks++;
+                    textView_Clicks.setText("Clicks: " + clicks);
+
+                //On Release return image to normal
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    float x = 1;
+                    float y = 1;
+
+                    imageButton_Clicks.setScaleX(x);
+                    imageButton_Clicks.setScaleY(y);
+                }
+                return false;
             }
         });
+    }
+    private void showData(DataSnapshot dataSnapshot){
+        UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+        textView_HighScore.setText("Highscore: " + Integer.toString(userProfile.getHighscore()));
     }
 }

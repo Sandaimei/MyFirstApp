@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +10,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
+    android:background="@drawable/grass_bg"
     tools:context="com.example.willie.myfirstapp.GameState">
 
     <TextView
@@ -17,8 +19,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:text="Highscore: 0"
-        android:textSize="24dp" />
+        android:text=""
+        android:textSize="24dp"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/textView_Clicks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_HighScore"
+        android:text="Clicks: 0"
+        android:textSize="24dp"
+        android:textColor="#000000"
+        />
 
     <TextView
         android:id="@+id/textView_Time"
@@ -27,39 +41,66 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:text="Time: 30"
-        android:textSize="32dp" />
+        android:textSize="32dp"
+        android:textColor="#000000"
+        />
 
-    <TextView
-        android:id="@+id/textView_Clicks"
+    <ImageButton
+        android:id="@+id/imageButton_Clicks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:text="Clicks: 0"
-        android:textSize="34dp" />
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        app:srcCompat="@drawable/sun" />
 
-    <Button
-        android:id="@+id/button_Clicks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textView_Clicks"
-        android:layout_centerHorizontal="true"
-        android:text="CLICK" />
-
-    <Button
-        android:id="@+id/button_Back"
-        android:layout_width="144dp"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="MAIN MENU" />
+        android:background="@drawable/rounded"
+        >
 
-    <Button
-        android:id="@+id/button_Start"
-        android:layout_width="144dp"
-        android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/imageButton_Back"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            app:srcCompat="@drawable/mainmenu" />
+        <ImageView
+            android:id="@+id/imageView_back"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/back_image"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="120dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="" />
+        android:background="@drawable/rounded"
+        >
 
+        <ImageButton
+            android:id="@+id/imageButton_Start"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            app:srcCompat="@drawable/mainmenu" />
+        <TextView
+            android:id="@+id/textView_Start"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text=""
+            android:textSize="24dp"
+            android:textColor="#000000"
+            />
+
+    </FrameLayout>
 </RelativeLayout>
