@@ -22,7 +22,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private TextView profileName;
+    private TextView profileName, highScore;
 
     Button button_Play;
 
@@ -32,6 +32,7 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_homescreen);
 
         profileName = findViewById(R.id.tvProfileName);
+        highScore = findViewById(R.id.tvHighScore);
         button_Play = (Button) findViewById(R.id.button_Play);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -43,6 +44,8 @@ public class HomeScreen extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                 profileName.setText("HI " + userProfile.getFirst_Name() + "!");
+                highScore.setText("Your High Score is: " + userProfile.getHighscore());
+
             }
 
             @Override
@@ -74,7 +77,7 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(new Intent(HomeScreen.this, Login.class));
             }
             case R.id.updateMenu: {
-                //startActivity(new Intent(HomeScreen.this, UpdateInfo.class));
+                startActivity(new Intent(HomeScreen.this, UpdateInfo.class));
             }
         }
         return super.onOptionsItemSelected(item);
