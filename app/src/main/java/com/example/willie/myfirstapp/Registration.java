@@ -27,8 +27,9 @@ public class Registration extends AppCompatActivity {
     private EditText userPassword;
     private TextView signIn;
     private Button register;
-    private String firstName, lastName, age, email, password, highscore ="0";
+    private String firstName, lastName, age, email, password;
     private FirebaseAuth firebaseAuth;
+    private int highscore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,7 @@ public class Registration extends AppCompatActivity {
     private void sendUserData() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         @SuppressLint("RestrictedApi") DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
-        UserProfile profile = new UserProfile(firstName, lastName, age, 0);
+        UserProfile profile = new UserProfile(firstName, lastName, age, highscore);
         myRef.setValue(profile);
     }
 }

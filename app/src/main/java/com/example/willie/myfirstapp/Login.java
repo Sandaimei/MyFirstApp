@@ -40,12 +40,12 @@ public class Login extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-
+        /*
         FirebaseUser user = firebaseAuth.getCurrentUser(); //This line checks if the user is already logged in.
         if(user != null) {//Automatically logs the user in if he has already signed in.
             finish();
             startActivity(new Intent(Login.this, HomeScreen.class));
-        }
+        }*/
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
