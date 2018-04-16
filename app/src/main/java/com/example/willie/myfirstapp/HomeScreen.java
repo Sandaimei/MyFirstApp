@@ -74,8 +74,7 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(new Intent(HomeScreen.this, Login.class));
             }
             case R.id.updateMenu: {
-                finish();
-                startActivity(new Intent(HomeScreen.this, UpdateInfo.class));
+                //startActivity(new Intent(HomeScreen.this, UpdateInfo.class));
             }
         }
         return super.onOptionsItemSelected(item);
