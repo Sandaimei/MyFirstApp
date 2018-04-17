@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,18 +24,19 @@ public class HomeScreen extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private TextView profileName, highScore;
+    private TextView highScore;
 
-    Button button_Play;
+    ImageButton button_Play;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
 
-        profileName = findViewById(R.id.tvProfileName);
+
         highScore = findViewById(R.id.tvHighScore);
-        button_Play = (Button) findViewById(R.id.button_Play);
+
+        button_Play = (ImageButton) findViewById(R.id.button_Play);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -43,8 +46,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                profileName.setText("HI " + userProfile.getFirst_Name() + "!");
-                highScore.setText("Your High Score is: " + userProfile.getHighscore());
+                highScore.setText("High Score: " + userProfile.getHighscore());
 
             }
 

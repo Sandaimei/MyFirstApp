@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class UpdateInfo extends AppCompatActivity {
     private EditText updatedFirstName;
     private EditText updatedLastName;
     private EditText updatedAge;
-    private Button  saveBtn;
+    private ImageButton saveBtn;
 
     private int highscore;
     private FirebaseAuth firebaseAuth;

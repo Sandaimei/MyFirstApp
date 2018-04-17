@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class Login extends AppCompatActivity {
     private EditText userPassword;
     private TextView attemps;
     private TextView userRegistration;
-    private Button login;
+    private ImageButton login;
     private int counter = 5;
     private FirebaseAuth firebaseAuth;
     private String name, password;
@@ -35,7 +36,7 @@ public class Login extends AppCompatActivity {
         userName = (EditText)findViewById(R.id.etUserName);
         userPassword = (EditText)findViewById(R.id.etPassword);
         attemps = (TextView)findViewById(R.id.tvAttempts);
-        login = (Button)findViewById(R.id.btnLogin);
+        login = (ImageButton)findViewById(R.id.btnLogin);
         userRegistration = (TextView)findViewById(R.id.tvRegister);
 
         firebaseAuth = FirebaseAuth.getInstance();

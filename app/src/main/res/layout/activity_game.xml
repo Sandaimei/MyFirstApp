@@ -52,7 +52,7 @@
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
         android:background="@null"
-        app:srcCompat="@drawable/sun" />
+        app:srcCompat="@drawable/sunsleep" />
 
     <FrameLayout
         android:layout_width="60dp"
@@ -75,7 +75,6 @@
             android:layout_gravity="center"
             app:srcCompat="@drawable/back_image"
             />
-
     </FrameLayout>
 
     <FrameLayout

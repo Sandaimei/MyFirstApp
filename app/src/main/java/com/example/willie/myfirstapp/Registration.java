@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ public class Registration extends AppCompatActivity {
     private EditText userEmail;
     private EditText userPassword;
     private TextView signIn;
-    private Button register;
+    private ImageButton register;
     private String firstName, lastName, age, email, password;
     private FirebaseAuth firebaseAuth;
     private int highscore = 0;
@@ -85,7 +86,7 @@ public class Registration extends AppCompatActivity {
         userEmail = (EditText)findViewById(R.id.etUserEmail);
         userPassword = (EditText)findViewById(R.id.etUserPassword);
         signIn = (TextView)findViewById(R.id.tvSignIn);
-        register = (Button)findViewById(R.id.btnRegister);
+        register = (ImageButton)findViewById(R.id.btnRegister);
     }
 
     private Boolean validate() {
