@@ -17,6 +17,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Login extends AppCompatActivity {
 
     private EditText userName;
@@ -83,6 +86,18 @@ public class Login extends AppCompatActivity {
                     attemps.setText("Number of attempts remaining " + String.valueOf(counter));
                     if(counter == 0) {
                         login.setActivated(false);
+                        TimerTask timeout = new TimerTask() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(30000);
+                                    login.setActivated(true);
+                                    counter = 5;
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        };
                     }
                 }
             }
